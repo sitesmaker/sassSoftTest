@@ -1,79 +1,68 @@
+@import "tailwindcss";
+@import "tailwindcss-primeui";
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --p-select-overlay-background: #fffcf2;
+  --p-select-overlay-border-color: rgba(235, 94, 40);
+  --p-select-overlay-border-radius: 4px;
+  --p-select-option-focus-background: rgba(235, 94, 40, .4);
+  --p-select-option-selected-focus-background: rgba(235, 94, 40);
+  --p-select-option-selected-background: rgba(235, 94, 40);
+  --p-select-option-selected-color: #fff;
+  --p-select-option-selected-focus-color: #fff;
+  --p-select-option-padding: 8px 16px;
+  
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+#app .p-inputtext,
+#app .p-select {
+  border: 2px solid #333;
+  transition: all ease-in-out .4s;
+  border-radius: 4px;
+  padding: 6px 12px;
 }
-a:hover {
-  color: #535bf2;
+
+#app .p-inputtext:hover,
+#app .p-select:hover {
+  border-color: rgba(235, 94, 40, .6);
+}
+
+#app .p-inputtext:focus,
+#app .p-select:focus {
+  border-color: rgba(235, 94, 40, .6);
+  background-color: rgba(235, 94, 40, .2);
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 16px;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.card {
-  padding: 2em;
+  background-color: #fffcf2;
+  color: #333;
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 24;
 }
