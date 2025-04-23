@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useAppStore } from '@/stores/index';
-import PrimaryButton from '@comp/PrimaryButton.vue';
+import { useAppStore } from '@/stores';
+import PrimaryButton from '@/components/PrimaryButton.vue';
 import Select from 'primevue/select';
 import InputText from 'primevue/inputtext';
 import { onMounted, onUpdated } from 'vue';
@@ -55,11 +55,23 @@ const isPasswordField = (user:IUsers) => {
   return user.type?.toUpperCase().trim() != 'LDAP';
 };
 
-const showPassword = (e, user:IUsers) => {
-  const target = e.target;
-  const inputType = target.closest('[data="password-field"]').querySelector('input');
-  const showPasswordIcon = target.closest('[data="password-field"]').querySelector('[data="password-show"]');
-  const hidePasswordIcon = target.closest('[data="password-field"]').querySelector('[data="password-hide"]');
+const showPassword = (e: MouseEvent) => {
+  const target = e.target as HTMLElement;
+  const passwordField = target.closest('[data="password-field"]') as HTMLElement | null;
+
+  if (!passwordField) {
+    console.error('Password field not found');
+    return;
+  }
+
+  const inputType = passwordField.querySelector('input') as HTMLInputElement | null;
+  const showPasswordIcon = passwordField.querySelector('[data="password-show"]') as HTMLElement | null;
+  const hidePasswordIcon = passwordField.querySelector('[data="password-hide"]') as HTMLElement | null;
+
+  if (!inputType || !showPasswordIcon || !hidePasswordIcon) {
+    console.error('One or more elements not found');
+    return;
+  }
 
   if(inputType.getAttribute('type') == 'password') {
     inputType.setAttribute('type', 'text');
@@ -75,20 +87,12 @@ const showPassword = (e, user:IUsers) => {
 onMounted(() => {
   store.getCurrentUsers();
   store.users.forEach((user:IUsers) => {
-    user.labelInput = user.label.map(labelObj => labelObj.text).join('; ')
+    user.labelInput = user.label.map((labelObj:ILabel) => labelObj.text).join('; ')
   })
 })
 
 onUpdated(() => {
-  store.saveCurrentUsers(store.users.map(el => {
-    return {
-      id: el.id,
-      type: el.type,
-      label: el.label,
-      login: el.login,
-      password: el.password
-    }
-  }));
+  store.saveCurrentUsers(store.users);
 })
 </script>
 
@@ -155,7 +159,7 @@ onUpdated(() => {
                 type="password"
                 class="w-full !pr-[40px]"
               />
-              <div @click="showPassword($event, user)">
+              <div @click="showPassword($event)">
                 <i class="pi pi-eye absolute right-2 top-[50%] -translate-[50%] cursor-pointer" data="password-show"></i>
                 <i class="pi pi-eye-slash absolute right-2 top-[50%] -translate-[50%] cursor-pointer hidden" data="password-hide"></i>
               </div>

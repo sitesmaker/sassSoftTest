@@ -30,8 +30,8 @@ export const useAppStore = defineStore('app', {
         deleteUser(id:number) {
             this.users = this.users.filter(user => user.id != id)
         },
-        saveCurrentUsers():void {
-            const resultArr = this.users.map(({labelInput, ...rest}) => rest)
+        saveCurrentUsers(users: IUsers[]):void {
+            const resultArr = users.map(({labelInput, ...rest}) => rest)
             localStorage.setItem('users', JSON.stringify(resultArr));
         },
         getCurrentUsers():void {

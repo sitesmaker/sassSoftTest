@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
     btnType: {
         type: String as () => "submit" | "button" | "reset",
         default: 'submit'
