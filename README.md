@@ -1,3 +1,3 @@
-Установка: npm install
-Запуск: npm run dev
-Cборка: npm run build
+Установка: npm install <br>
+Запуск: npm run dev <br>
+Cборка: npm run build <br>
